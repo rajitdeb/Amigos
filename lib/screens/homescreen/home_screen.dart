@@ -1,8 +1,11 @@
+import 'package:amigos/screens/auth/login_screen.dart';
 import 'package:amigos/screens/bottombar/follow_requests.dart';
 import 'package:amigos/screens/bottombar/home.dart';
 import 'package:amigos/screens/bottombar/profile.dart';
 import 'package:amigos/themes/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Amigos", style: TextStyle(color: Colors.white),),
         backgroundColor: MyColors.mainColor,
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.search, color: Colors.white,)),
-          IconButton(onPressed: (){}, icon: const Icon(Icons.logout, color: Colors.white,)),
+          IconButton(onPressed: (){ }, icon: const Icon(Icons.search, color: Colors.white,)),
+          IconButton(onPressed: (){ _signoutUser(); }, icon: const Icon(Icons.logout, color: Colors.white,)),
         ],
       ),
       body: Container(
@@ -64,5 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  void _signoutUser() async {
+    await FirebaseAuth.instance.signOut();
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        Get.offAll(() => LoginScreen());
+      }
+    });
   }
 }

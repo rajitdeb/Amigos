@@ -1,3 +1,4 @@
+import 'package:amigos/themes/styles.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -8,6 +9,7 @@ class Home extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
+      color: MyColors.contentPageColor,
       child: Center(
         child: Text("Home", style: TextStyle(color: Colors.white, fontSize: 48.0)),
       ),

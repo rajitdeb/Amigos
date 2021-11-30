@@ -1,5 +1,6 @@
-import 'package:amigos/screens/splash_screen.dart';
+import 'package:amigos/screens/splashscreen/splash_screen.dart';
 import 'package:amigos/themes/styles.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    _initializeFirebase();
+
     return GetMaterialApp(
       title: 'Amigos',
       theme: ThemeData(
@@ -26,10 +30,14 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-        primaryColor: MyColors.mainColor
+        primaryColor: MyColors.mainColor,
       ),
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
+  }
+
+  void _initializeFirebase() async{
+    await Firebase.initializeApp();
   }
 }

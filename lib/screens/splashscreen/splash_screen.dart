@@ -1,5 +1,8 @@
-import 'package:amigos/screens/home_screen.dart';
+import 'package:amigos/screens/homescreen/home_screen.dart';
+import 'package:amigos/screens/auth/login_screen.dart';
 import 'package:amigos/themes/styles.dart';
+import 'package:amigos/widgets/app_text_logo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +33,9 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
+            SizedBox(height: 120.0,),
+
             appTextLogo(context),
 
             const SizedBox(
@@ -40,35 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
             appVersionNumber(context)
           ],
         ),
-      ),
-    );
-  }
-
-  Widget appTextLogo(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        children: const [
-
-          SizedBox(height: 120.0,),
-
-          Text(
-              "Amigos",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 48.0,
-              fontWeight: FontWeight.w900
-            ),
-          ),
-
-          Text(
-            "Connect with people",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.normal
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -90,6 +67,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _moveToHomeScreen() async {
     await Future.delayed(const Duration(milliseconds: 3500));
-    Get.offAll(() => const HomeScreen());
+    // Get.offAll(() => const LoginScreen());
+    if(FirebaseAuth.instance.currentUser != null){
+      Get.offAll(() => const HomeScreen());
+    } else {
+      Get.offAll(() => const LoginScreen());
+    }
   }
 }
