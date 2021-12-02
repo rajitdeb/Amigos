@@ -1,7 +1,7 @@
 import 'package:amigos/screens/auth/login_screen.dart';
-import 'package:amigos/screens/bottombar/follow_requests.dart';
-import 'package:amigos/screens/bottombar/home.dart';
-import 'package:amigos/screens/bottombar/profile.dart';
+import 'package:amigos/screens/homescreen/bottombar/follow_requests.dart';
+import 'package:amigos/screens/homescreen/bottombar/home.dart';
+import 'package:amigos/screens/homescreen/bottombar/profile.dart';
 import 'package:amigos/themes/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

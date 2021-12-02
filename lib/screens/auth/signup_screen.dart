@@ -242,7 +242,7 @@ class _SignupScreenState extends State<SignupScreen> {
           setState(() => isLoading = false);
 
           var amigosUser = AmigosUser(null, user.uid, "sample_test", fullName, user.email!,
-             null, 0, null, 0, 0, null);
+             null, 0, List.empty(), 0, 0, List.empty());
 
           Get.offAll(() => const VerifyEmailScreen(), arguments: amigosUser);
         }

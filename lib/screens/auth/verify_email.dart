@@ -149,7 +149,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         var finalUser = FirebaseAuth.instance.currentUser!;
 
         var finalAmigosUser = AmigosUser(null, finalUser.uid, "sample_test",
-            finalUser.email!, amigosUser.fullName, null, 0, null, 0, 0, null);
+            amigosUser.fullName, finalUser.email!, null, 0, List.empty(), 0, 0, List.empty());
 
         await CreateUserBloc()
             .addAmigosUserToFirestore(context, finalAmigosUser);

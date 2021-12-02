@@ -6,10 +6,10 @@ class AmigosUser {
   String email;
   String? bio;
   int postsCount;
-  List<AmigosUserPosts>? posts;
+  List<dynamic> posts;
   int followersCount;
   int followingCount;
-  List<AmigosUserDetail>? userDetails;
+  List<dynamic> userDetails;
 
   AmigosUser(
       this.profileImg,
@@ -41,8 +41,8 @@ class AmigosUser {
 }
 
 class AmigosUserDetail {
-  List<AmigosUser>? followers;
-  List<AmigosUser>? following;
+  List<dynamic> followers;
+  List<dynamic> following;
 
   AmigosUserDetail.fromJson(Map<String, dynamic> json)
       : followers = (json["followers"] as List)
@@ -54,14 +54,27 @@ class AmigosUserDetail {
 }
 
 class AmigosUserPosts {
-  int postId;
   String? postCaption;
   String? postImgLink;
+  String authorFullName;
+  String authorUserId;
+  String? authorProfileImg;
+  String authorUsername;
+  int createdAt;
+  List<dynamic> likedBy;
 
-  AmigosUserPosts(this.postId, this.postCaption, this.postImgLink);
+
+  AmigosUserPosts(this.postCaption, this.postImgLink, this.authorFullName,
+      this.authorUserId, this.authorProfileImg, this.authorUsername,
+      this.createdAt, this.likedBy);
 
   AmigosUserPosts.fromJson(Map<String, dynamic> json)
-      : postId = json["postId"],
-        postCaption = json["postCaption"],
-        postImgLink = json["postImgLink"];
+      : postCaption = json["postCaption"],
+        postImgLink = json["postImgLink"],
+        authorFullName = json["authorFullName"],
+        authorUserId = json["authorUserId"],
+        authorProfileImg = json["authorProfileImg"],
+        authorUsername = json["authorUsername"],
+        createdAt = json["createdAt"],
+        likedBy = json["likedBy"];
 }
