@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:amigos/model/user.dart';
 import 'package:amigos/screens/homescreen/home_screen.dart';
 import 'package:amigos/widgets/snackbar_widget.dart';
@@ -9,7 +8,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class AmigosRepository {
   // endpoints
@@ -29,11 +27,8 @@ class AmigosRepository {
           'fullName': user.fullName,
           'email': user.email,
           'bio': user.bio,
-          'postsCount': user.postsCount,
-          'posts': user.posts,
-          'followersCount': user.followersCount,
-          'followingCount': user.followingCount,
-          'userDetails': user.userDetails
+          'followers': user.followers,
+          'following': user.following
         })
         .then((value) => mySnackBar(context, "User details added."))
         .catchError((error) =>
@@ -110,5 +105,26 @@ class AmigosRepository {
         'likedBy': post.likedBy
       });
     });
+  }
+
+  uploadProfilePicture(File imgFile) async {
+
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    var filename = basename(imgFile.path);
+    var destination = "userProfileImages/$userId/$filename";
+    var ref = FirebaseStorage.instance.ref(destination);
+
+    var snapshot = await ref.putFile(imgFile);
+
+    snapshot.ref.getDownloadURL().then((value) async {
+      return await userCollection.doc(FirebaseAuth.instance.currentUser!.uid).update({ 'profileImg': value });
+    });
+  }
+
+  Future<QuerySnapshot> searchUsers(String searchQuery) async {
+    return await userCollection
+        .where(['username', 'fullName'], isEqualTo: searchQuery)
+        .get();
   }
 }

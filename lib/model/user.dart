@@ -5,11 +5,8 @@ class AmigosUser {
   String fullName;
   String email;
   String? bio;
-  int postsCount;
-  List<dynamic> posts;
-  int followersCount;
-  int followingCount;
-  List<dynamic> userDetails;
+  List<dynamic> followers;
+  List<dynamic> following;
 
   AmigosUser(
       this.profileImg,
@@ -18,11 +15,8 @@ class AmigosUser {
       this.fullName,
       this.email,
       this.bio,
-      this.postsCount,
-      this.posts,
-      this.followersCount,
-      this.followingCount,
-      this.userDetails);
+      this.followers,
+      this.following);
 
   AmigosUser.fromJson(Map<String, dynamic> json)
       : profileImg = json["profileImg"],
@@ -31,26 +25,8 @@ class AmigosUser {
         fullName = json["fullName"],
         email = json["email"],
         bio = json["bio"],
-        postsCount = json["postsCount"],
-        posts = (json["posts"] as List)
-            .map((e) => AmigosUserPosts.fromJson(json))
-            .toList(),
-        followersCount = json["followersCount"],
-        followingCount = json["followingCount"],
-        userDetails = json["userDetails"];
-}
-
-class AmigosUserDetail {
-  List<dynamic> followers;
-  List<dynamic> following;
-
-  AmigosUserDetail.fromJson(Map<String, dynamic> json)
-      : followers = (json["followers"] as List)
-            .map((e) => AmigosUser.fromJson(json))
-            .toList(),
-        following = (json["following"] as List)
-            .map((e) => AmigosUser.fromJson(json))
-            .toList();
+        followers = json["followers"],
+        following = json["following"];
 }
 
 class AmigosUserPosts {

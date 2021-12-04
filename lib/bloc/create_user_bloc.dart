@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:amigos/model/user.dart';
 import 'package:amigos/repository/repository.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,10 @@ class CreateUserBloc {
 
   setAmigosUserCustomUsername(BuildContext context, String userId, String username) async {
     await _repository.setAmigosUserCustomUsername(context, userId, username);
+  }
+
+  uploadProfilePicture(File imgFile) async {
+    await _repository.uploadProfilePicture(imgFile);
   }
 
 }

@@ -99,10 +99,10 @@ class Home extends StatelessWidget {
                           ? Container(
                               width: 50.0,
                               height: 50.0,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          post.authorProfileImg!))),
+                              child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      post.authorProfileImg!)
+                              ),
                             )
                           : Container(
                               width: 50.0,

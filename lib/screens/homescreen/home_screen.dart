@@ -3,6 +3,7 @@ import 'package:amigos/screens/homescreen/bottombar/follow_requests.dart';
 import 'package:amigos/screens/homescreen/bottombar/home.dart';
 import 'package:amigos/screens/homescreen/bottombar/profile.dart';
 import 'package:amigos/themes/styles.dart';
+import 'package:amigos/widgets/search_users_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,17 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Amigos", style: TextStyle(color: Colors.white),),
         backgroundColor: MyColors.mainColor,
         actions: [
-          IconButton(onPressed: (){ }, icon: const Icon(Icons.search, color: Colors.white,)),
+          IconButton(
+              onPressed: () =>
+                  showSearch(
+                      context: context,
+                      delegate: SearchUsers()
+                  ),
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
+              )
+          ),
           IconButton(onPressed: (){ _signoutUser(); }, icon: const Icon(Icons.logout, color: Colors.white,)),
         ],
       ),
