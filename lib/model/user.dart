@@ -54,3 +54,78 @@ class AmigosUserPosts {
         createdAt = json["createdAt"],
         likedBy = json["likedBy"];
 }
+
+class AmigosUserFollowRequests {
+
+  List<dynamic> followRequestsList;
+
+  AmigosUserFollowRequests(this.followRequestsList);
+
+  AmigosUserFollowRequests.fromJson(Map<String, dynamic> json)
+    : followRequestsList = json['followRequestList'];
+}
+
+class AmigosFollowRequestUser {
+
+  String? userId;
+  String? fullName;
+  String? username;
+  String? profileImg;
+
+  AmigosFollowRequestUser(
+      this.userId, this.fullName, this.username, this.profileImg);
+
+  AmigosFollowRequestUser.fromJson(Map<String, dynamic> json)
+    : userId = json['userId'],
+      fullName = json['fullName'],
+      username = json['username'],
+      profileImg = json['profileImg'];
+}
+
+class FollowerDetails {
+
+  String? userId;
+  String? fullName;
+  String? username;
+  String? profileImg;
+
+  FollowerDetails(
+      this.userId, this.fullName, this.username, this.profileImg);
+
+  Map<String, dynamic> toJson() => {
+
+    'userId': userId,
+    'fullName': fullName,
+    'username': username,
+    'profileImg': profileImg,
+
+  };
+
+}
+
+class FollowingDetails {
+
+  String? userId;
+  String? fullName;
+  String? username;
+  String? profileImg;
+
+  FollowingDetails(
+      this.userId, this.fullName, this.username, this.profileImg);
+
+  FollowingDetails.fromJson(Map<String, dynamic> json)
+      : userId = json['userId'],
+        fullName = json['fullName'],
+        username = json['username'],
+        profileImg = json['profileImg'];
+
+  Map<String, dynamic> toJson() => {
+
+    'userId': userId,
+    'fullName': fullName,
+    'username': username,
+    'profileImg': profileImg,
+
+  };
+
+}

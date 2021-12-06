@@ -3,6 +3,7 @@ import 'package:amigos/bloc/create_user_bloc.dart';
 import 'package:amigos/bloc/get_user_bloc.dart';
 import 'package:amigos/model/user.dart';
 import 'package:amigos/themes/styles.dart';
+import 'package:amigos/utils/utils.dart';
 import 'package:amigos/widgets/snackbar_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,14 +24,11 @@ class _ProfileState extends State<Profile> {
   File? profileImg;
 
   int postsCount = 0;
-  int followersCount = 0;
-  int followingCount = 0;
 
   @override
   void initState() {
     super.initState();
     _getTotalPostsCount();
-    // _getTotalFollowingCount();
     _loadUserProfile();
   }
 
@@ -90,7 +88,7 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      postsCount.toString(),
+                                      Utils().getFormattedCounts(postsCount),
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16.0,
@@ -108,7 +106,7 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      amigosUser!.followers.length.toString(),
+                                      Utils().getFormattedCounts(amigosUser!.followers.length),
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16.0,
@@ -126,7 +124,7 @@ class _ProfileState extends State<Profile> {
                                 Column(
                                   children: [
                                     Text(
-                                      amigosUser!.following.length.toString(),
+                                      Utils().getFormattedCounts(amigosUser!.following.length),
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16.0,

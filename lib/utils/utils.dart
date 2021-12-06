@@ -1,5 +1,8 @@
+import 'package:intl/intl.dart';
+
 class Utils {
 
+  // TIME FORMATTER
   static const SECOND_MILLIS = 1000;
   static const MINUTE_MILLIS = 60 * SECOND_MILLIS;
   static const HOUR_MILLIS = 60 * MINUTE_MILLIS;
@@ -35,5 +38,14 @@ class Utils {
 
   return _calculatedTime;
 }
+
+
+  // FOLLOWERS, POSTS, FOLLOWING COUNT FORMATTER
+
+  String getFormattedCounts(int count) {
+
+    var countFormat = NumberFormat.compact();
+    return countFormat.format(count).toString();
+  }
 
 }
