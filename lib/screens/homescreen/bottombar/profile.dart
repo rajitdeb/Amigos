@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:amigos/bloc/create_user_bloc.dart';
 import 'package:amigos/bloc/get_user_bloc.dart';
 import 'package:amigos/model/user.dart';
+import 'package:amigos/screens/follower_screen/follower_screen.dart';
+import 'package:amigos/screens/following_screen/following_screen.dart';
 import 'package:amigos/themes/styles.dart';
 import 'package:amigos/utils/utils.dart';
 import 'package:amigos/widgets/snackbar_widget.dart';
@@ -9,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_ui/animated_firestore_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
@@ -103,41 +106,47 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      Utils().getFormattedCounts(amigosUser!.followers.length),
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const Text(
-                                      "Followers",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                                GestureDetector(
+                                  onTap: () { Get.to(() => const FollowerScreen()); },
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        Utils().getFormattedCounts(amigosUser!.followers.length),
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const Text(
+                                        "Followers",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      Utils().getFormattedCounts(amigosUser!.following.length),
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const Text(
-                                      "Following",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                                GestureDetector(
+                                  onTap: () { Get.to(() => const FollowingScreen()); },
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        Utils().getFormattedCounts(amigosUser!.following.length),
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const Text(
+                                        "Following",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -297,15 +306,6 @@ class _ProfileState extends State<Profile> {
                   color: Colors.white,
                 ),
                 title: const Text("Account Settings",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () => print("Profile Picture Changed!"),
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.help,
-                  color: Colors.white,
-                ),
-                title: const Text("Help and Support",
                     style: TextStyle(color: Colors.white)),
                 onTap: () => print("Profile Picture Changed!"),
               ),

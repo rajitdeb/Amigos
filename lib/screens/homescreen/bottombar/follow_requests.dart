@@ -1,13 +1,9 @@
-import 'dart:convert';
-
-import 'package:amigos/bloc/follow_user_bloc.dart';
 import 'package:amigos/bloc/get_user_bloc.dart';
 import 'package:amigos/model/user.dart';
 import 'package:amigos/themes/styles.dart';
 import 'package:amigos/widgets/snackbar_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firestore_ui/animated_firestore_list.dart';
 import 'package:flutter/material.dart';
 
 class FollowRequests extends StatefulWidget {
