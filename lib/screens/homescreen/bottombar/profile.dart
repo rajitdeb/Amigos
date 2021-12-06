@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:amigos/bloc/create_user_bloc.dart';
 import 'package:amigos/bloc/get_user_bloc.dart';
 import 'package:amigos/model/user.dart';
+import 'package:amigos/screens/auth/login_screen.dart';
 import 'package:amigos/screens/follower_screen/follower_screen.dart';
 import 'package:amigos/screens/following_screen/following_screen.dart';
 import 'package:amigos/themes/styles.dart';
@@ -298,16 +299,9 @@ class _ProfileState extends State<Profile> {
                 ),
                 title: const Text("Delete Account",
                     style: TextStyle(color: Colors.white)),
-                onTap: () => print("Profile Picture Changed!"),
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                ),
-                title: const Text("Account Settings",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () => print("Profile Picture Changed!"),
+                onTap: () {
+                  _showDeleteAccountConfirmation(context);
+                },
               ),
             ],
           );
@@ -500,6 +494,131 @@ class _ProfileState extends State<Profile> {
         .then((value) => setState(() => postsCount = value.size));
 
     print("POSTS COUNT: $postsCount");
+
+  }
+
+  _showDeleteAccountConfirmation(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        enableDrag: false,
+        backgroundColor: MyColors.mainColor,
+        builder: (builder) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      "Account Deletion Confirmation",
+                      style: TextStyle(
+                          color: MyColors.secondColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.center,
+                    )),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                const SizedBox(
+                    width: 70.0,
+                    height: 70.0,
+                    child: Icon(Icons.warning, color: Colors.white, size: 48.0,)
+                ),
+
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: const Text(
+                      "You won't to be able to retrieve your account after this. Are you sure you want to delete your profile?",
+                      style: TextStyle(
+                          color: MyColors.secondColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.center,
+                    )),
+
+                const SizedBox(
+                  height: 32.0,
+                ),
+
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: MaterialButton(
+                          height: 50.0,
+                          onPressed: () {
+                            Navigator.of(context).pop(context);
+                          },
+                          color: Colors.white,
+                          child: const Center(
+                              child: Text("CANCEL",
+                                  style: TextStyle(color: MyColors.accentColor))),
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      Expanded(
+                        child: MaterialButton(
+                          height: 50.0,
+                          onPressed: () {
+                            Navigator.of(context).pop(context);
+                            _removeUserDataAndRelatedInformation();
+
+                          },
+                          color: MyColors.accentColor,
+                          child: const Center(
+                              child: Text("CONFIRM",
+                                  style: TextStyle(color: Colors.white))),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void _removeUserDataAndRelatedInformation() async {
+    /*
+
+      * 1. Delete user account details from firestore(userDetails)
+      *
+      * 2. Delete user authentication details from FirebaseAuth
+
+     */
+
+    // remove user auth credentials from FirebaseAuth
+    await FirebaseAuth.instance.currentUser!.delete();
+
+    // sign out user
+    FirebaseAuth.instance.signOut();
+
+    Get.offAll(() => LoginScreen());
+
+    // remove userDetails from firestore 'users' collection
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .delete()
+        .then((value) => mySnackBar(context, "Successfully deleted user"));
+
+    // remove users FollowRequest document
+    await FirebaseFirestore.instance
+        .collection('followRequests')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .delete()
+        .then((value) => null);
+
+
+
+
 
   }
 }
