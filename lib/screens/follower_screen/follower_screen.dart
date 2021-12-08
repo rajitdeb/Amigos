@@ -58,11 +58,28 @@ class _FollowerScreenState extends State<FollowerScreen> {
               height: MediaQuery.of(context).size.height,
               color: MyColors.contentPageColor,
               padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
-              child: ListView.builder(
-                  itemCount: followers.length,
-                  itemBuilder: (context, index) {
-                    return _pendingFollowRequestItemRow(context, index);
-                  })),
+              child: followers.isEmpty
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: 190.0,
+                            height: 190.0,
+                            child: Image.asset("images/others/no_results.png")),
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+                        const Text(
+                          "You currently don't have any followers.",
+                          style: TextStyle(color: MyColors.secondColor),
+                        )
+                      ],
+                    )
+                  : ListView.builder(
+                      itemCount: followers.length,
+                      itemBuilder: (context, index) {
+                        return _pendingFollowRequestItemRow(context, index);
+                      })),
     );
   }
 
@@ -210,7 +227,7 @@ class _FollowerScreenState extends State<FollowerScreen> {
               .collection('users')
               .doc(followerDetails.userId)
               .update({'following': followersFollowing}).then((value) {
-                setState(() => followers.clear());
+            setState(() => followers.clear());
             _getAllFollowers();
           });
         }

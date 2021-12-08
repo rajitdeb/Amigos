@@ -57,7 +57,24 @@ class _FollowingScreenState extends State<FollowingScreen> {
           height: MediaQuery.of(context).size.height,
           color: MyColors.contentPageColor,
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
-          child: ListView.builder(
+          child: followings.isEmpty
+          ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  width: 190.0,
+                  height: 190.0,
+                  child: Image.asset("images/others/no_results.png")),
+              const SizedBox(
+                height: 8.0,
+              ),
+              const Text(
+                "You aren't following anyone right now.",
+                style: TextStyle(color: MyColors.secondColor),
+              )
+            ],
+          )
+          : ListView.builder(
               itemCount: followings.length,
               itemBuilder: (context, index) {
                 return _followingtItemRow(context, index);

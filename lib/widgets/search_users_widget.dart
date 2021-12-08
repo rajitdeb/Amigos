@@ -1,6 +1,6 @@
 import 'package:amigos/bloc/search_users_bloc.dart';
 import 'package:amigos/model/user.dart';
-import 'package:amigos/screens/homescreen/searched_user_profile_screen.dart';
+import 'package:amigos/screens/searched_user_profile/searched_user_profile_screen.dart';
 import 'package:amigos/themes/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_ui/animated_firestore_list.dart';
@@ -38,7 +38,7 @@ class SearchUsers extends SearchDelegate {
     return query.isNotEmpty
         ? Container(
             color: MyColors.contentPageColor,
-            padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
             child: FirestoreAnimatedList(
               query: FirebaseFirestore.instance
                   .collection('users')

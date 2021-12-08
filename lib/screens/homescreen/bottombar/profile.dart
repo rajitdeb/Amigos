@@ -239,6 +239,24 @@ class _ProfileState extends State<Profile> {
                                     isEqualTo:
                                         FirebaseAuth.instance.currentUser!.uid)
                                 .orderBy('createdAt', descending: true),
+                            emptyChild: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                      width: 190.0,
+                                      height: 190.0,
+                                      child: Image.asset("images/others/no_results.png")),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  const Text(
+                                    "No posts found",
+                                    style: TextStyle(color: MyColors.secondColor),
+                                  )
+                                ],
+                              ),
+                            ),
                             crossAxisCount: 3,
                             mainAxisSpacing: 2.0,
                             childAspectRatio: 1.0,

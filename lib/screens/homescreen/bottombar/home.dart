@@ -31,14 +31,14 @@ class Home extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                        width: 120.0,
-                        height: 120.0,
-                        child: Image.asset("images/others/github_profile.jpg")),
-                    SizedBox(
-                      height: 16.0,
+                        width: 190.0,
+                        height: 190.0,
+                        child: Image.asset("images/others/no_results.png")),
+                    const SizedBox(
+                      height: 8.0,
                     ),
-                    Text(
-                      "Nothing to show for now",
+                    const Text(
+                      "No posts found",
                       style: TextStyle(color: MyColors.secondColor),
                     )
                   ],
