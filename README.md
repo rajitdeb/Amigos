@@ -34,4 +34,4 @@ Download this app from [here][1]
 [![LinkedIn Profile](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/imrajit/)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/rajit.deb/)
 
-[1]: "https://github.com/rajitdeb/Amigos/raw/8-Add-App-Icons/apk/amigos_final_build.apk"
+[1]: https://github.com/rajitdeb/Amigos/raw/8-Add-App-Icons/apk/amigos_final_build.apk
